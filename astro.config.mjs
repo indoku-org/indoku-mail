@@ -6,5 +6,5 @@ export default defineConfig({
   output: "server",
   adapter: vercel(),
   integrations: [react()],
-  vite: { resolve: { dedupe: ["react", "react-dom"] }, ssr: { noExternal: ["@indoku/ui", "sanitize-html"] } },
+  vite: { resolve: { dedupe: ["react", "react-dom"] }, ssr: { noExternal: ["@indoku/ui"] } },
 })
