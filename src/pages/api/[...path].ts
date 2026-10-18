@@ -19,9 +19,14 @@ export const ALL: APIRoute = async ({ request, cookies, params }) => {
     const pass = String(body.pass ?? "")
     try {
       await mail.withImap(user, pass, async () => {})
-    } catch {
-      noteFail(ip)
-      return json({ error: "Incorrect email or password." }, 401)
+    } catch (e: any) {
+      if (e?.authenticationFailed) {
+        noteFail(ip)
+        return json({ error: "Incorrect email or password." }, 401)
+      }
+      // Connection/TLS problem, not a wrong password: surface it and keep it out of the rate limiter.
+      console.error("[login] IMAP connection error:", e?.code, e?.message)
+      return json({ error: "Can't reach the mail server right now. Please try again in a moment." }, 502)
     }
     cookies.set("sid", createSession(user, pass), { httpOnly: true, sameSite: "strict", secure: import.meta.env.PROD, path: "/", maxAge: 28800 })
     return json({ ok: true })
