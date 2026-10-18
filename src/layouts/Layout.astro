@@ -1,0 +1,19 @@
+---
+import { colorModeScript } from "@indoku/ui"
+const { title = "Indoku Mail" } = Astro.props
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex" />
+    <title>{title}</title>
+    <script is:inline set:html={colorModeScript} />
+    <style is:global>
+      html, body { height: 100%; margin: 0; }
+      body { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
+    </style>
+  </head>
+  <body><slot /></body>
+</html>

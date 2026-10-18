@@ -1,0 +1,7 @@
+---
+import Layout from "../layouts/Layout.astro"
+import Login from "../components/Login"
+import { getSession } from "../lib/session"
+if (getSession(Astro.cookies.get("sid")?.value)) return Astro.redirect("/")
+---
+<Layout title="Sign in · Indoku Mail"><Login client:only="react" /></Layout>

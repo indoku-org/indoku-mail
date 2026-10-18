@@ -1,0 +1,24 @@
+{
+  "name": "indoku-mail",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "start": "node dist/server/entry.mjs"
+  },
+  "dependencies": {
+    "@astrojs/react": "^7.1.0",
+    "@astrojs/vercel": "^11.0.15",
+    "@emotion/react": "^11.14.0",
+    "@indoku/ui": "^0.0.3-beta",
+    "astro": "^7.4.0",
+    "imapflow": "^2.5.2",
+    "mailparser": "^3.9.40",
+    "nodemailer": "^10.1.2",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-icons": "^5.7.0",
+    "sanitize-html": "^2.18.1"
+  }
+}
