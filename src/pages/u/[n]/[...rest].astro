@@ -1,0 +1,13 @@
+---
+import Layout from "../../../layouts/Layout.astro"
+import MailApp from "../../../components/MailApp"
+import { getSession } from "../../../lib/session"
+
+const s = getSession(Astro.cookies.get("sid")?.value)
+if (!s) return Astro.redirect("/login")
+const n = Number(Astro.params.n)
+if (!Number.isInteger(n) || n < 0 || n >= s.accounts.length) return Astro.redirect("/u/0/inbox")
+if (!Astro.params.rest) return Astro.redirect(`/u/${n}/inbox`)
+const accounts = s.accounts.map((a) => a.user)
+---
+<Layout title="Indoku Mail" noindex><MailApp acct={n} accounts={accounts} client:only="react" /></Layout>

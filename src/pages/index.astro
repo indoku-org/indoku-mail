@@ -1,8 +1,4 @@
 ---
-import Layout from "../layouts/Layout.astro"
-import MailApp from "../components/MailApp"
 import { getSession } from "../lib/session"
-const s = getSession(Astro.cookies.get("sid")?.value)
-if (!s) return Astro.redirect("/login")
+return Astro.redirect(getSession(Astro.cookies.get("sid")?.value) ? "/u/0/inbox" : "/login")
 ---
-<Layout title="Inbox · Indoku Mail" noindex><MailApp user={s.user} client:only="react" /></Layout>

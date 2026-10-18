@@ -2,6 +2,8 @@
 import Layout from "../layouts/Layout.astro"
 import Login from "../components/Login"
 import { getSession } from "../lib/session"
-if (getSession(Astro.cookies.get("sid")?.value)) return Astro.redirect("/")
+const add = Astro.url.searchParams.get("add") === "1"
+// Already signed in: go to the inbox, unless the person came here to add another account.
+if (getSession(Astro.cookies.get("sid")?.value) && !add) return Astro.redirect("/u/0/inbox")
 ---
-<Layout title="Sign in · Indoku Mail"><Login client:only="react" /></Layout>
+<Layout title={add ? "Add account · Indoku Mail" : "Sign in · Indoku Mail"}><Login add={add} client:only="react" /></Layout>
